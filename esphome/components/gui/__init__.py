@@ -138,12 +138,12 @@ async def to_code(config):
     # Make sure that lv_conf.h gets copied to the src directory, along with
     # other generated files.
     lv_conf_path = os.path.join(component_dir, 'lv_conf.h')
-    core.CORE.add_job(cfg.add_includes, [lv_conf_path])
- 
-    cg.add_library("lvgl/lvgl", "^8.3")
-    cg.add_platformio_option("build_flags", LVGL_BUILD_FLAGS)
-    cg.add_platformio_option("build_flags", ["-D LV_CONF_PATH='"+lv_conf_path+"'"])
-    gui = cg.new_Pvariable(config[CONF_ID])
+     core.CORE.add_job(cfg.add_includes, [lv_conf_path])
+
+     cg.add_library("https://github.com/lvgl/lvgl.git", None)
+     cg.add_platformio_option("build_flags", LVGL_BUILD_FLAGS)
+     cg.add_platformio_option("build_flags", ["-D LV_CONF_PATH='"+lv_conf_path+"'"])
+     gui = cg.new_Pvariable(config[CONF_ID])
     await cg.register_component(gui, config)
 
     disp = await cg.get_variable(config[CONF_DISPLAY_ID])
